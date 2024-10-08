@@ -21,26 +21,21 @@ Since this is just a fluent plugin form of Twitter's Snowflake generator, I won'
 ## Configuration
 
 ### Parameters
-- **column**:
+- **column**: The key in your record to assign this ID to. Will overwrite any existing value. 
   - **Type**: *string*
   - **Default**: "id"
-  - The key in your record to assign this ID to. Will overwrite any existing value. 
-- **worker_id**:
+- **worker_id**: A 5-bit unique identifier for the machine, or "worker", generating this ID. 
   - **Type**: *int*
   - **Default**: 1
-  - A 5-bit unique identifier for the machine, or "worker", generating this ID. 
-- **datacenter_id**:
+- **datacenter_id**: A 5-bit unique identifier for the datacenter this machine is in.
   - **Type**: *int*
   - **Default**: 1
-  - A 5-bit unique identifier for the datacenter this machine is in.
-- **custom_epoch_ms**:
+- **custom_epoch_ms**: A custom epoch (milliseconds since the Unix epoch) to use as the basis for generating IDs. Cannot be greater than the current Unix millisecond time. I recommend setting this as high as is possible; however, ensure you don't change it after you begin generating IDs (otherwise they could collide on the same worker and datacenter).
   - **Type**: *int*
   - **Default**: 1288834974657 *(the "Twitter Epoch")*
-  - A custom epoch (milliseconds since the Unix epoch) to use as the basis for generating IDs. Cannot be greater than the current Unix millisecond time. I recommend setting this as high as is possible; however, ensure you don't change it after you begin generating IDs (otherwise they could collide on the same worker and datacenter).
-- **sequence_start**:
+- **sequence_start**: The custom sequence number to start generating IDs with. I highly recommend not setting this unless you're debugging.
   - **Type**: *int*
   - **Default**: 0
-  - The custom sequence number to start generating IDs with. I highly recommend not setting this unless you're debugging.
 
 ### Examples 
 
