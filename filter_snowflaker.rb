@@ -50,11 +50,12 @@ module Fluent
 
         # note: this is a class-level (global) lock.
         # May want to change to an instance-level lock if this is reworked to some kind of singleton or worker daemon.
-        MUTEX_LOCK = Monitor.new
+        # MUTEX_LOCK = Monitor.new
 
         def initialize(worker_id = 0, datacenter_id = 0, custom_epoch = TWEPOCH, sequence = 0, logger = nil)
           raise "Worker ID set to #{worker_id} which is invalid" if worker_id > MAX_WORKER_ID || worker_id < 0
           raise "Datacenter ID set to #{datacenter_id} which is invalid" if datacenter_id > MAX_DATACENTER_ID || datacenter_id < 0
+          @mutex_lock = Monitor.new
           @worker_id = worker_id
           @datacenter_id = datacenter_id
           @sequence = sequence
@@ -73,7 +74,7 @@ module Fluent
         protected
 
         def next_id
-          MUTEX_LOCK.synchronize do
+          @mutex_lock.synchronize do
             timestamp = current_time_millis
             if timestamp < @last_timestamp
               @logger.fatal("clock is moving backwards.  Rejecting requests until %d." % @last_timestamp)
