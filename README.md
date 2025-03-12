@@ -16,7 +16,7 @@ Since this is just a fluent plugin form of Twitter's Snowflake generator, I won'
 
 ## Installation
 
-Drag `filter_snowflaker.rb` into the fluentd plugin directory (e.g. `/etc/fluent/plugin` on Ubuntu).
+Move `filter_snowflaker.rb` into the fluentd plugin directory (e.g. `/etc/fluent/plugin` on Ubuntu).
 
 ## Configuration
 
